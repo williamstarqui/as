@@ -55,14 +55,12 @@ class CoverController extends Controller
             'titulo' => 'required',
             'foto' => 'required|image|max:2048',
         ]);
-
         $nombre = Str::random(10) . $request->file('foto')->getClientOriginalName();
         $ruta = storage_path() . '\app\public\img/' . $nombre;
         Image::make($request->file('foto'))
             ->resize(1680, 800)
             ->save($ruta);
         // $imagen = $request->file('url')->store('public/img');;
-
         //  $url = Storage::url($ruta);
         $covers = new Cover();
         $covers->titulo = $request->input('titulo');
