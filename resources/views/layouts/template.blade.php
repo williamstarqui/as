@@ -142,12 +142,12 @@
                         <li class="nav-item active">
                             <a class="navbar-brand" href="{{ route('inicio') }}">INICIO</a>
                         </li>
-                        <li class="nav-item">
+                        {{-- <li class="nav-item">
                             <a class="navbar-brand" href="{{ route('service') }}">SERVICIOS</a>
                         </li>
                         <li class="nav-item">
                             <a class="navbar-brand" href="{{ route('about') }}">SOBRE NOSOTROS</a>
-                        </li>
+                        </li> --}}
                     </ul>
                 </div>
             </div>
