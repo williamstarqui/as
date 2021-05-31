@@ -4,12 +4,12 @@
 // });
 
 Route::get('/', 'Web\PageController@index')->name('inicio');
-Route::get('/sobre-nosotros', function () {
-    return view('web.about');
-})->name('about');
-Route::get('/servicios', function () {
-    return view('web.services');
-})->name('service');
+// Route::get('/sobre-nosotros', function () {
+//     return view('web.about');
+// })->name('about');
+// Route::get('/servicios', function () {
+//     return view('web.services');
+// })->name('service');
 Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 Route::resource('/admin/cover', 'Admin\CoverController');
