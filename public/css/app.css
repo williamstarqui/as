@@ -66,8 +66,8 @@ section {
 
 body {
   margin: 0;
-  font-family: var(--bs-font-sans-serif);
-  font-size: 1rem;
+  font-family: "Nunito", sans-serif;
+  font-size: 0.9rem;
   font-weight: 400;
   line-height: 1.6;
   color: #212529;
@@ -7073,7 +7073,7 @@ button.bg-light:focus {
 }
 
 .bg-dark {
-  background-color: #04090e !important;
+  background-color: #343a40 !important;
 }
 
 a.bg-dark:hover,
