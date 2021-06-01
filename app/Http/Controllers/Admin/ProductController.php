@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Intervention\Image\Facades\Image;
 use Illuminate\Support\Str;
 use App\Product;
+use Illuminate\Support\Facades\Storage;
 
 class ProductController extends Controller
 {
@@ -50,27 +51,43 @@ class ProductController extends Controller
             'foto' => 'required|image|max:2048',
         ]);
 
-        $nombre = Str::random(5) . $request->file('foto')->getClientOriginalName();
-        $ruta = storage_path() . '\app\public\img/' . $nombre;
-        Image::make($request->file('foto'))
-            ->resize(400, 500, function ($constraint) {
-            $constraint->aspectRatio();
-            $constraint->upsize();
-            })
-            ->save($ruta);
+        // $nombre = Str::random(5) . $request->file('foto')->getClientOriginalName();
+        // $ruta = storage_path() . '\app\public\img/' . $nombre;
+        // Image::make($request->file('foto'))
+        //     ->resize(400, 500, function ($constraint) {
+        //     $constraint->aspectRatio();
+        //     $constraint->upsize();
+        //     })
+        //     ->save($ruta);
 
 
         // $imagen = $request->file('url')->store('public/img');;
 
         //  $url = Storage::url($ruta);
-        $products = new Product();
-        $products->nombre = $request->input('nombre');
-        $products->marca = $request->input('marca');
-        $products->descripcion = $request->input('descripcion');
-        $products->precio = $request->input('precio');
-        $products->foto = '/storage/img/' . $nombre;
-        $products->save();
+        // $products = new Product();
+        // $products->nombre = $request->input('nombre');
+        // $products->marca = $request->input('marca');
+        // $products->descripcion = $request->input('descripcion');
+        // $products->precio = $request->input('precio');
+        // $products->foto = '/storage/img/' . $nombre;
+        // $products->save();
+            
+        $product = new Product();
+        $product->nombre      = $request->input('nombre');
+        $product->marca       = $request->input('marca');
+        $product->descripcion = $request->input('descripcion');
+        $product->precio      = $request->input('precio');
+        $product->foto        =  $request->file('foto')->store('images');
+        $product->save();
 
+        $foto = Image::make(Storage::get($product->foto))
+        ->resize(400, 500, function ($constraint) {
+                $constraint->aspectRatio();
+                $constraint->upsize();
+                })
+        ->encode();
+
+        Storage::put($product->foto, (string) $foto);
         return redirect()->route('product.index')->with('info', 'Agregado correctamente.');
         // $product = Product::create($request->all());
         // return redirect()->route('covers.index')->with('info', 'Producto creado con éxito');

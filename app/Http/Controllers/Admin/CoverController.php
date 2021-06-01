@@ -7,7 +7,6 @@ use Illuminate\Http\Request;
 use Intervention\Image\Facades\Image;
 use Illuminate\Support\Str;
 use App\Cover;
-
 use Illuminate\Support\Facades\Storage;
 
 class CoverController extends Controller
@@ -51,10 +50,10 @@ class CoverController extends Controller
      */
     public function store(Request $request)
     {
-        // $request->validate([
-        //     'titulo' => 'required',
-        //     'foto' => 'required|image|max:2048',
-        // ]);
+        $request->validate([
+            'titulo' => 'required',
+            'foto' => 'required|image|max:2048',
+        ]);
         // $nombre = Str::random(10) . $request->file('foto')->getClientOriginalName();
         // $ruta = storage_path() . '\app\public\img/' . $nombre;
         // Image::make($request->file('foto'))
@@ -66,16 +65,15 @@ class CoverController extends Controller
         // $covers->titulo = $request->input('titulo');
         // $covers->foto = '/storage/img/' . $nombre;
         // $covers->save();
-            $cover = new Cover();
-           $cover->titulo = $request->input('titulo');
-            $cover->foto = $request->file('foto')->store('images');
-            $cover->save();
+        $cover = new Cover();
+        $cover->titulo = $request->input('titulo');
+        $cover->foto = $request->file('foto')->store('images');
+        $cover->save();
 
-            $foto = Image::make(Storage::get($cover->foto))
-            ->widen(600)
-            ->limitColors(255)
+        $foto = Image::make(Storage::get($cover->foto))
+            ->resize(1680, 800)
             ->encode();
-            Storage::put($cover->foto, (string) $foto);
+        Storage::put($cover->foto, (string) $foto);
         return redirect()->route('cover.index')->with('info', 'Agregado correctamente.');;
     }
 

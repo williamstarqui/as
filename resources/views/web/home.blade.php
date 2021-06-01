@@ -10,7 +10,7 @@
         <div class="carousel-inner">
             @foreach ($covers->take(4) as $cover)
                 <div class="carousel-item {{ $loop->first ? 'active' : '' }}">
-                    <img class="d-block w-100" src="{{ asset($cover->foto) }}" alt="">
+                    <img class="d-block w-100" src="/storage/{{$cover->foto}}" alt="">
                     <div class="container">
                         <div class="carousel-caption text-center">
                             <h1 class="jumbotron-heading text-white">Bienvenido</h1>
@@ -45,7 +45,7 @@
                         <div class="hover">
                             <div>
                                 <figure>
-                                    <img class="card-img-top" src="{{ asset($product->foto) }}" alt="Card image cap">
+                                    <img class="card-img-top" src="/storage/{{ $product->foto }}" alt="Card image cap">
                                 </figure>
                             </div>
                         </div>
@@ -66,7 +66,7 @@
                 </div>
             @endforeach
         </div>
-        <span>Ver mas:</span>
+        
         <div class="float-center">
             {{ $products->render() }}
         </div>

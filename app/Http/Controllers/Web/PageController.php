@@ -26,6 +26,16 @@ class PageController extends Controller
         ]);
     }
 
+    public function index1()
+    {
+        return view('web.services');
+    }
+
+    public function index2()
+    {
+        return view('web.about');
+    }
+
     /**
      * Show the form for creating a new resource.
      *

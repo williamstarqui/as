@@ -73,8 +73,8 @@
                                             <td class="">Bs. {{ $product->precio }}</td>
                                             <td>
 
-                                                <img id="myImg" width="100px" height="80px"
-                                                    src="{{ asset($product->foto) }}" alt="">
+                                                <img id="myImg" 
+                                                    src="/storage/{{ $product->foto }}" alt="">
 
                                             </td>
                                             {{-- <td>
