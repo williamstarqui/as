@@ -51,22 +51,31 @@ class CoverController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'titulo' => 'required',
-            'foto' => 'required|image|max:2048',
-        ]);
-        $nombre = Str::random(10) . $request->file('foto')->getClientOriginalName();
-        $ruta = storage_path() . '\app\public\img/' . $nombre;
-        Image::make($request->file('foto'))
-            ->resize(1680, 800)
-            ->save($ruta);
-        // $imagen = $request->file('url')->store('public/img');;
-        //  $url = Storage::url($ruta);
-        $covers = new Cover();
-        $covers->titulo = $request->input('titulo');
-        $covers->foto = '/storage/img/' . $nombre;
-        $covers->save();
+        // $request->validate([
+        //     'titulo' => 'required',
+        //     'foto' => 'required|image|max:2048',
+        // ]);
+        // $nombre = Str::random(10) . $request->file('foto')->getClientOriginalName();
+        // $ruta = storage_path() . '\app\public\img/' . $nombre;
+        // Image::make($request->file('foto'))
+        //     ->resize(1680, 800)
+        //     ->save($ruta);
+        // // $imagen = $request->file('url')->store('public/img');;
+        // //  $url = Storage::url($ruta);
+        // $covers = new Cover();
+        // $covers->titulo = $request->input('titulo');
+        // $covers->foto = '/storage/img/' . $nombre;
+        // $covers->save();
+            $cover = new Cover();
+           $cover->titulo = $request->input('titulo');
+            $cover->foto = $request->file('foto')->store('images');
+            $cover->save();
 
+            $foto = Image::make(Storage::get($cover->foto))
+            ->widen(600)
+            ->limitColors(255)
+            ->encode();
+            Storage::put($cover->foto, (string) $foto);
         return redirect()->route('cover.index')->with('info', 'Agregado correctamente.');;
     }
 

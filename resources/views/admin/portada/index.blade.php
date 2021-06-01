@@ -66,7 +66,7 @@
                                     @foreach ($covers as $cover)
                                         <tr>
                                             <td class="">{{ $cover->titulo }}</td>
-                                            <td><img width="100px" height="80px" src="{{ asset($cover->foto) }}" alt="">
+                                            <td><img width="100px" height="80px" src="/storage/{{ $cover->foto }}" alt="">
                                             </td>
                                             <td>
                                                 <form action="{{ route('cover.destroy', $cover->id) }}" method="post">
