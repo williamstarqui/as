@@ -51,7 +51,7 @@ class ProductController extends Controller
         ]);
 
         $nombre = Str::random(5) . $request->file('foto')->getClientOriginalName();
-        $ruta = storage_path() . '\app\public\img/' . $nombre;
+        $ruta = storage_path() . '\app\public\img\ ' . $nombre;
         Image::make($request->file('foto'))
             ->resize(400, 500, function ($constraint) {
             $constraint->aspectRatio();
