@@ -20,14 +20,14 @@
                                     class="fas fa-plus"></i>
                                 Nuevo</a>
                             <div class="card-tools">
-                                <div class="input-group input-group-sm" style="width: 150px;">
+                                {{-- <div class="input-group input-group-sm" style="width: 150px;">
                                     <input type="text" name="table_search" class="form-control float-right"
                                         placeholder="Buscar">
 
                                     <div class="input-group-append">
                                         <button type="submit" class="btn btn-default"><i class="fas fa-search"></i></button>
                                     </div>
-                                </div>
+                                </div> --}}
                             </div>
                         </div>
                         <!-- /.card-header -->
@@ -73,8 +73,7 @@
                                             <td class="">Bs. {{ $product->precio }}</td>
                                             <td>
 
-                                                <img id="myImg" 
-                                                    src="/storage/{{ $product->foto }}" alt="">
+                                                <img width="100px" src="/storage/{{ $product->foto }}" alt="">
 
                                             </td>
                                             {{-- <td>
